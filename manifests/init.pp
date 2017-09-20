@@ -12,6 +12,8 @@ class mcollective (
 
   # core configuration
   $confdir          = $mcollective::defaults::confdir,
+  $system_user      = 'root',
+  $system_group     = '0',
   $main_collective  = 'mcollective',
   $collectives      = 'mcollective',
   $connector        = 'activemq',

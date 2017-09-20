@@ -18,10 +18,10 @@ class mcollective::client::config (
   }
   else {
     datacat { 'mcollective::client':
-      owner    => $owner,
-      group    => $group,
-      mode     => $mode,
+      owner    => $mcollective::system_user,
+      group    => $mcollective::system_group,
       path     => $mcollective::client_config_file_real,
+      mode     => $mode,
       template => 'mcollective/settings.cfg.erb',
     }
   }

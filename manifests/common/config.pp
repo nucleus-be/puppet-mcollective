@@ -8,8 +8,8 @@ class mcollective::common::config (
 
   file { $mcollective::site_libdir:
     ensure       => directory,
-    owner        => 'root',
-    group        => '0',
+    owner        => $mcollective::system_user,
+    group        => $mcollective::system_group,
     mode         => '0644',
     recurse      => true,
     purge        => $purge_libdir,

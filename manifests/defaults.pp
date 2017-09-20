@@ -19,6 +19,7 @@ class mcollective::defaults {
     $site_libdir = $::osfamily ? {
       'Debian'  => '/usr/local/share/mcollective',
       'OpenBSD' => regsubst($::rubyversion, '^(\d+)\.(\d+)\.(\d+)$', '/usr/local/lib/ruby/vendor_ruby/\1.\2/mcollective'),
+      'windows' => 'C:/Program Files/Puppet Labs/Puppet/mcollective/lib',
       default   => '/usr/local/libexec/mcollective',
     }
   } else {

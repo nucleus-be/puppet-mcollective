@@ -5,8 +5,8 @@ class mcollective::server::config {
   }
 
   datacat { 'mcollective::server':
-    owner    => 'root',
-    group    => '0',
+    owner    => $mcollective::system_user,
+    group    => $mcollective::system_group,
     mode     => '0400',
     path     => $mcollective::server_config_file_real,
     template => 'mcollective/settings.cfg.erb',
@@ -30,37 +30,37 @@ class mcollective::server::config {
 
   file { "${mcollective::confdir}/policies":
     ensure => 'directory',
-    owner  => 'root',
-    group  => '0',
+    owner  => $mcollective::system_user,
+    group  => $mcollective::system_group,
     mode   => '0700',
   }
 
   file { $mcollective::ssldir:
     ensure => 'directory',
-    owner  => 'root',
-    group  => '0',
+    owner  => $mcollective::system_user,
+    group  => $mcollective::system_group,
     mode   => '0755',
   }
 
   if $::mcollective::middleware_ssl {
 
     file { $::mcollective::middleware_ssl_ca_path:
-      owner  => 'root',
-      group  => '0',
+      owner  => $mcollective::system_user,
+      group  => $mcollective::system_group,
       mode   => '0444',
       source => $::mcollective::middleware_ssl_ca_real,
     }
 
     file { $::mcollective::middleware_ssl_key_path:
-      owner  => 'root',
-      group  => '0',
+      owner  => $mcollective::system_user,
+      grou   => $mcollective::system_group,
       mode   => '0400',
       source => $::mcollective::middleware_ssl_key_real,
     }
 
     file { $::mcollective::middleware_ssl_cert_path:
-      owner  => 'root',
-      group  => '0',
+      owner  => $mcollective::system_user,
+      group  => $mcollective::system_group,
       mode   => '0444',
       source => $::mcollective::middleware_ssl_cert_real,
     }
@@ -70,15 +70,15 @@ class mcollective::server::config {
   if $::mcollective::securityprovider == 'ssl' {
 
     file { $::mcollective::ssl_server_public_path:
-      owner  => 'root',
-      group  => '0',
+      owner  => $mcollective::system_user,
+      group  => $mcollective::system_group,
       mode   => '0444',
       source => $::mcollective::ssl_server_public,
     }
 
     file { $::mcollective::ssl_server_private_path:
-      owner  => 'root',
-      group  => '0',
+      owner  => $mcollective::system_user,
+      group  => $mcollective::system_group,
       mode   => '0400',
       source => $::mcollective::ssl_server_private,
     }

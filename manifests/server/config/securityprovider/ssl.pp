@@ -6,8 +6,8 @@ class mcollective::server::config::securityprovider::ssl {
 
   file { $::mcollective::ssl_client_certs_dir_real:
     ensure  => 'directory',
-    owner   => 'root',
-    group   => '0',
+    owner    => $mcollective::system_user,
+    group    => $mcollective::system_group,
     purge   => true,
     recurse => true,
     mode    => '0400',

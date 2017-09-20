@@ -7,8 +7,8 @@ define mcollective::actionpolicy($default = 'deny') {
   include ::mcollective
 
   datacat { "mcollective::actionpolicy ${name}":
-    owner    => 'root',
-    group    => '0',
+    owner    => $mcollective::system_user,
+    group    => $mcollective::system_group,
     mode     => '0400',
     path     => "${mcollective::confdir}/policies/${name}.policy",
     template => 'mcollective/actionpolicy.erb',
