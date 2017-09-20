@@ -32,14 +32,20 @@ class mcollective::server::config {
     ensure => 'directory',
     owner  => $mcollective::system_user,
     group  => $mcollective::system_group,
-    mode   => '0700',
+    mode   => $osfamily ? {
+      windows => undef,
+      default => '0700',
+    }
   }
 
   file { $mcollective::ssldir:
     ensure => 'directory',
     owner  => $mcollective::system_user,
     group  => $mcollective::system_group,
-    mode   => '0755',
+    mode   => $osfamily ? {
+      windows => undef,
+      default => '0755',
+    }
   }
 
   if $::mcollective::middleware_ssl {
