@@ -60,14 +60,20 @@ class mcollective::server::config {
     file { $::mcollective::middleware_ssl_key_path:
       owner  => $mcollective::system_user,
       group  => $mcollective::system_group,
-      mode   => '0400',
+      mode   => $::osfamily ? {
+        windows => undef,
+        default => '0400',
+      },
       source => $::mcollective::middleware_ssl_key_real,
     }
 
     file { $::mcollective::middleware_ssl_cert_path:
       owner  => $mcollective::system_user,
       group  => $mcollective::system_group,
-      mode   => '0444',
+      mode   => $::osfamily ? {
+        windows => undef,
+        default => '0444',
+      },
       source => $::mcollective::middleware_ssl_cert_real,
     }
 
@@ -78,14 +84,20 @@ class mcollective::server::config {
     file { $::mcollective::ssl_server_public_path:
       owner  => $mcollective::system_user,
       group  => $mcollective::system_group,
-      mode   => '0444',
+      mode   => $::osfamily ? {
+        windows => undef,
+        default => '0444',
+      },
       source => $::mcollective::ssl_server_public,
     }
 
     file { $::mcollective::ssl_server_private_path:
       owner  => $mcollective::system_user,
       group  => $mcollective::system_group,
-      mode   => '0400',
+      mode   => $::osfamily ? {
+        windows => undef,
+        default => '0400',
+      },
       source => $::mcollective::ssl_server_private,
     }
 
