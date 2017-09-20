@@ -10,10 +10,10 @@ class mcollective::server::config::securityprovider::ssl {
     group   => $mcollective::system_group,
     purge   => true,
     recurse => true,
-    mode    => $osfamily ? {
+    mode    => $::osfamily ? {
       windows => undef,
       default => '0400',
-    }
+    },
     source  => $::mcollective::ssl_client_certs,
   }
 

@@ -32,7 +32,7 @@ class mcollective::server::config {
     ensure => 'directory',
     owner  => $mcollective::system_user,
     group  => $mcollective::system_group,
-    mode   => $osfamily ? {
+    mode   => $::osfamily ? {
       windows => undef,
       default => '0700',
     }
@@ -42,7 +42,7 @@ class mcollective::server::config {
     ensure => 'directory',
     owner  => $mcollective::system_user,
     group  => $mcollective::system_group,
-    mode   => $osfamily ? {
+    mode   => $::osfamily ? {
       windows => undef,
       default => '0755',
     }
