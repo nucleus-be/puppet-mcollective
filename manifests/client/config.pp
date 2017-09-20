@@ -20,8 +20,11 @@ class mcollective::client::config (
     datacat { 'mcollective::client':
       owner    => $mcollective::system_user,
       group    => $mcollective::system_group,
+      mode     => $::osfamily ? {
+        windows => undef,
+        default => $mode,
+      },
       path     => $mcollective::client_config_file_real,
-      mode     => $mode,
       template => 'mcollective/settings.cfg.erb',
     }
   }

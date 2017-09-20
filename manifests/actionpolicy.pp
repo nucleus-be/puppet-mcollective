@@ -9,7 +9,10 @@ define mcollective::actionpolicy($default = 'deny') {
   datacat { "mcollective::actionpolicy ${name}":
     owner    => $mcollective::system_user,
     group    => $mcollective::system_group,
-    mode     => '0400',
+    mode     => $::osfamily ? {
+      windows => undef,
+      default => '0400',
+    },
     path     => "${mcollective::confdir}/policies/${name}.policy",
     template => 'mcollective/actionpolicy.erb',
   }

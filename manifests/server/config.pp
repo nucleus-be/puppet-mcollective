@@ -7,7 +7,10 @@ class mcollective::server::config {
   datacat { 'mcollective::server':
     owner    => $mcollective::system_user,
     group    => $mcollective::system_group,
-    mode     => '0400',
+    mode   => $::osfamily ? {
+      windows => undef,
+      default => '0400',
+    }
     path     => $mcollective::server_config_file_real,
     template => 'mcollective/settings.cfg.erb',
   }
