@@ -13,7 +13,7 @@ class mcollective::common::config (
     mode         => $osfamily ? {
       windows => undef,
       default => '0644',
-    }
+    },
     recurse      => true,
     purge        => $purge_libdir,
     force        => true,
