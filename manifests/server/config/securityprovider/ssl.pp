@@ -6,11 +6,14 @@ class mcollective::server::config::securityprovider::ssl {
 
   file { $::mcollective::ssl_client_certs_dir_real:
     ensure  => 'directory',
-    owner    => $mcollective::system_user,
-    group    => $mcollective::system_group,
+    owner   => $mcollective::system_user,
+    group   => $mcollective::system_group,
     purge   => true,
     recurse => true,
-    mode    => '0400',
+    mode    => $osfamily ? {
+      windows => undef,
+      default => '0400',
+    }
     source  => $::mcollective::ssl_client_certs,
   }
 

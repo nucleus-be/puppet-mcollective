@@ -10,7 +10,10 @@ class mcollective::common::config (
     ensure       => directory,
     owner        => $mcollective::system_user,
     group        => $mcollective::system_group,
-    mode         => '0644',
+    mode         => $osfamily ? {
+      windows => undef,
+      default => '0644',
+    }
     recurse      => true,
     purge        => $purge_libdir,
     force        => true,
