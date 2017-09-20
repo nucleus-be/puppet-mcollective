@@ -53,7 +53,7 @@ class mcollective::server::config {
 
     file { $::mcollective::middleware_ssl_key_path:
       owner  => $mcollective::system_user,
-      grou   => $mcollective::system_group,
+      group  => $mcollective::system_group,
       mode   => '0400',
       source => $::mcollective::middleware_ssl_key_real,
     }
