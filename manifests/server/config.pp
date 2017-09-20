@@ -10,7 +10,7 @@ class mcollective::server::config {
     mode   => $::osfamily ? {
       windows => undef,
       default => '0400',
-    }
+    },
     path     => $mcollective::server_config_file_real,
     template => 'mcollective/settings.cfg.erb',
   }
