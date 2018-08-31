@@ -6,7 +6,10 @@
 # list, it's leak and prevents users from actually having control.
 class mcollective::defaults {
   if versioncmp($::puppetversion, '4') < 0 {
-    $confdir = '/etc/mcollective'
+    $confdir     = $::osfamily ? {
+      'windows' => 'C:/ProgramData/PuppetLabs/mcollective/etc',
+      default   => '/etc/mcollective',
+    }
     $_core_libdir = $::osfamily ? {
       'Debian'  => '/usr/share/mcollective/plugins',
       'OpenBSD' => '/usr/local/libexec/mcollective',
@@ -23,9 +26,15 @@ class mcollective::defaults {
       default   => '/usr/local/libexec/mcollective',
     }
   } else {
-    $confdir     = '/etc/puppetlabs/mcollective'
+    $confdir     = $::osfamily ? {
+      'windows' => 'C:/ProgramData/PuppetLabs/mcollective/etc',
+      default   => '/etc/puppetlabs/mcollective',
+    }
     $_core_libdir = '/opt/puppetlabs/mcollective/plugins'
-    $site_libdir = '/opt/puppetlabs/mcollective'
+    $site_libdir = $::osfamily ? {
+      'windows' => 'C:/Program Files/Puppet Labs/Puppet/mcollective/lib',
+      default   => '/opt/puppetlabs/mcollective',
+    }
   }
 
   # Since mcollective version 2.8, there is no core libdir
